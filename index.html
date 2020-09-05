@@ -49,7 +49,7 @@
       <div class="container-fluid mt-3">
         <p v-if="form.q !== ''">Generated link to search by <b>{{form.q}}</b></p>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" v-if="form.q !== ''">
           <button class="btn btn-primary mb-2 mr-2 btn-sm" v-on:click="openAll">Open All</button>
           <button class="btn btn-primary mb-2 mr-2 btn-sm" v-on:click="openSelected">Open Selected</button>
           <small>(you need to allow to open many windows)</small>
