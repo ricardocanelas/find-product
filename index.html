@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find Product</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- development version, includes helpful console warnings -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+      nav {
+        padding: 12px;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <nav class="d-flex">
+        <div class="form-group mb-0">
+          <label class="sr-only" for="fieldQ">Search</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Search:</div>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="fieldQ"
+              placeholder="Keyword"
+              v-model="form.q"
+              style="width: 364px"
+            />
+          </div>
+        </div>
+        <!-- <div class="form-group ml-3 mb-0">
+          <button class="btn btn-outline-primary" v-on:click="search">Search</button>
+        </div> -->
+      </nav>
+
+      <div class="container-fluid mt-3">
+        <p v-if="form.q !== ''">Generated link to search by {{form.q}}</p>
+        <table class="table table-striped table-bordered table-hover table-sm" style="width: auto" v-if="form.q !== ''">
+          <thead class="thead-dark">
+            <tr>
+              <th style="width: 26px"></th>
+              <th>Label</th>
+              <th style="width: 100px">Country</th>
+              <th style="width: 140px">Type</th>
+              <th style="width: 70px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in sites" :key="item.label">
+              <td>
+                <input :id="'row_' + index" v-model="selected" v-bind:value="item.label" type="checkbox" />
+              </td>
+              <td>{{ item.label }}</td>
+              <td>{{ item.country }}</td>
+              <td>{{ item.type }}</td>
+              <td>
+                <a href="" v-bind:href="item.url.replace('[:q]', form.q)" rel="noopener noreferrer" target="_blank"
+                  >open</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+
+        data: {
+          form: {
+            q: 'PS5',
+          },
+          selected: [],
+          sites: [
+            { label: 'Gazin', url: 'https://www.gazin.com.br/categoria?busca=[:q]', type: 'store', country: 'BR' },
+            { label: 'Casas Bahia', url: 'https://www.casasbahia.com.br/[:q]/b', type: 'store', country: 'BR' },
+            { label: 'FastShop', url: 'https://www.fastshop.com.br/web/s/[:q]', type: 'store', country: 'BR' },
+            {
+              label: 'Magazine Luiza',
+              url: 'https://busca.magazineluiza.com.br/busca?q=[:q]',
+              type: 'store',
+              country: 'BR',
+            },
+            {
+              label: 'Angeloni',
+              url: 'https://www.angeloni.com.br/eletro/busca?Nrpp=12&Ntt=[:q]',
+              type: 'store',
+              country: 'BR',
+            },
+            {
+              label: 'Girafa',
+              url: 'https://www.girafa.com.br/pesquisa/busca/?q=[:q]&t=',
+              type: 'store',
+              country: 'BR',
+            },
+            { label: 'PontoFrio', url: 'https://www.pontofrio.com.br/[:q]/b', type: 'store', country: 'BR' },
+            { label: 'Carrefour', url: 'https://busca.carrefour.com.br/busca?q=[:q]', type: 'store', country: 'BR' },
+            { label: 'Shoptime', url: 'https://www.shoptime.com.br/busca/[:q]?rc=[:q]', type: 'store', country: 'BR' },
+            {
+              label: 'Kabum',
+              url: 'https://www.kabum.com.br/cgi-local/site/listagem/listagem.cgi?string=[:q]&btnG=',
+              type: 'store',
+              country: 'BR',
+            },
+            { label: 'eFacil', url: 'https://busca.efacil.com.br/busca?q=[:q]', type: 'store', country: 'BR' },
+            {
+              label: 'Ricardo Eletro',
+              url: 'https://www.ricardoeletro.com.br/#&search-term=[:q]',
+              type: 'store',
+              country: 'BR',
+            },
+            {
+              label: 'Submarino',
+              url: 'https://www.submarino.com.br/busca/[:q]?rc=[:q]',
+              type: 'store',
+              country: 'BR',
+            },
+            { label: 'Amazon', url: 'https://www.amazon.com.br/s?k=[:q]', type: 'store', country: 'BR' },
+            { label: 'Colombo', url: 'https://pesquisa.colombo.com.br/busca?q=[:q]', type: 'store', country: 'BR' },
+            { label: 'NovoMundo', url: 'https://www.novomundo.com.br/[:q]', type: 'store', country: 'BR' },
+            {
+              label: 'MadeiraMadeira',
+              url: 'https://www.madeiramadeira.com.br/busca?q=[:q]',
+              type: 'store',
+              country: 'BR',
+            },
+            { label: 'Sipolatti', url: 'https://www.sipolatti.com.br/[:q]', type: 'store', country: 'BR' },
+            { label: 'Bemol', url: 'https://www.bemol.com.br/pesquisa?t=[:q]', type: 'store', country: 'BR' },
+            { label: 'iByte', url: 'https://www.ibyte.com.br/[:q]', type: 'store', country: 'BR' },
+            { label: 'Multsom', url: 'https://www.multisom.com.br/busca/[:q]', type: 'store', country: 'BR' },
+            { label: 'Extra', url: 'https://www.extra.com.br/[:q]/b', type: 'store', country: 'BR' },
+            { label: 'Casa&Video', url: 'https://busca.casaevideo.com.br/busca?q=[:q]', type: 'store', country: 'BR' },
+            { label: 'SuperMuffato', url: 'https://www.supermuffato.com.br/[:q]', type: 'store', country: 'BR' },
+            { label: 'Worten', url: 'https://www.worten.pt/search?query=[:q]', type: 'store', country: 'PT' },
+            { label: 'Nagem', url: 'https://www.nagem.com.br/navegacao?busca=[:q]', type: 'store', country: 'BR' },
+            { label: 'Wolloko', url: 'https://www.wolloko.com.br/[:q]', type: 'store', country: 'BR' },
+            {
+              label: 'Havan',
+              url: 'https://www.havan.com.br/catalogsearch/result/?q=[:q]',
+              type: 'store',
+              country: 'BR',
+            },
+            { label: 'LojaSobino', url: 'https://www.lojasobino.com.br/busca?n=[:q]', type: 'store', country: 'BR' },
+            {
+              label: 'Jacotei',
+              url: 'https://www.jacotei.com.br/busca/?texto=OLED55C9&m=&n=',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            {
+              label: 'SouBarato',
+              url: 'https://www.soubarato.com.br/busca/oled55c9?rc=OLED55C9',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            {
+              label: 'Pelando',
+              url: 'https://www.pelando.com.br/search?q=OLED55C9',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            {
+              label: 'VigiaDePreço',
+              url: 'https://vigiadepreco.com.br/search/OLED55C9',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            {
+              label: 'Buscape',
+              url: 'https://www.buscape.com.br/search?q=OLED55C9',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            { label: 'Zoom', url: 'https://www.zoom.com.br/search?q=OLED55C9', type: 'compare-price', country: 'BR' },
+            {
+              label: 'BondFaro',
+              url: 'https://www.bondfaro.com.br/search?q=OLED55C9',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            {
+              label: 'Baixou',
+              url: 'https://www.baixou.com.br/busca/baixas/OLED55C9/',
+              type: 'compare-price',
+              country: 'BR',
+            },
+            {
+              label: 'Shopping Uol',
+              url: 'https://shopping.uol.com.br/search?q=oled55c9',
+              type: 'compare-price',
+              country: 'BR',
+            },
+          ],
+        },
+
+        methods: {
+          search: () => {},
+        },
+      })
+    </script>
+  </body>
+</html>

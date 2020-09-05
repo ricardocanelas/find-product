@@ -1,0 +1,13 @@
+{
+  "name": "find-product",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ricardocanelas/find-product.git"
+  },
+  "scripts": {
+    "start": "http-server ./"
+  }
+}
