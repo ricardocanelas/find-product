@@ -1,3 +1,3 @@
 # Find Product
 
-https://ricardocanelas.github.io/find-product/
+https://ricardocanelas.github.io/find-product/index.html
